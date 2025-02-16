@@ -1,9 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     darkMode: 'selector',
-    content: ["./resources/views/**/*.{html,js,php}"],
-    theme: {
+    content: [
+        "./resources/views/**/*.{blade.php,html,js}",
+        "./resources/livewire/**/*.{blade.php,html,js}",
+    ],
 
+    theme: {
         extend: {
             keyframes: {
                 float: {
