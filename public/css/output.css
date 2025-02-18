@@ -1,0 +1,68 @@
+/*! tailwindcss v4.0.6 | MIT License | https://tailwindcss.com */
+.static {
+  position: static;
+}
+.block {
+  display: block;
+}
+.flex {
+  display: flex;
+}
+.hidden {
+  display: none;
+}
+.inline-block {
+  display: inline-block;
+}
+.table {
+  display: table;
+}
+.flex-1 {
+  flex: 1;
+}
+.flex-none {
+  flex: none;
+}
+.transform {
+  transform: var(--tw-rotate-x) var(--tw-rotate-y) var(--tw-rotate-z) var(--tw-skew-x) var(--tw-skew-y);
+}
+.flex-col {
+  flex-direction: column;
+}
+.items-center {
+  align-items: center;
+}
+.stroke-current {
+  stroke: currentColor;
+}
+.normal-case {
+  text-transform: none;
+}
+.underline {
+  text-decoration-line: underline;
+}
+@property --tw-rotate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: rotateX(0);
+}
+@property --tw-rotate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: rotateY(0);
+}
+@property --tw-rotate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: rotateZ(0);
+}
+@property --tw-skew-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: skewX(0);
+}
+@property --tw-skew-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: skewY(0);
+}
