@@ -3,56 +3,58 @@
 
 <head>
     <title>Inscription</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 
 <body>
-    <h1>Inscription</h1>
-
-    @if ($errors->any())
-        <div>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+    <div class="form-container">
+      <h1>Inscription</h1>
+      
+      @if ($errors->any())
+        <div class="error-messages">
+          <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
         </div>
-    @endif
-
-    <form action="{{ route('register.post') }}" method="POST">
+      @endif
+  
+      <form action="{{ route('register.post') }}" method="POST">
         @csrf
-        <div>
-            <label>Nom :</label>
-            <input type="text" name="nom" required>
+        <div class="form-group">
+          <label>Nom</label>
+          <input type="text" name="nom" required>
         </div>
-
-        <div>
-            <label>Prénom :</label>
-            <input type="text" name="prenom" required>
+  
+        <div class="form-group">
+          <label>Prénom</label>
+          <input type="text" name="prenom" required>
         </div>
-
-        <div>
-            <label>Courriel :</label>
-            <input type="email" name="email" required>
+  
+        <div class="form-group">
+          <label>Courriel</label>
+          <input type="email" name="email" required>
         </div>
-
-        <div>
-            <label>Mot de passe :</label>
-            <input type="password" name="password" required>
+  
+        <div class="form-group">
+          <label>Mot de passe</label>
+          <input type="password" name="password" required>
         </div>
-
-        <div>
-            <label>Confirmer le mot de passe :</label>
-            <input type="password" name="password_confirmation" required>
+  
+        <div class="form-group">
+          <label>Confirmer le mot de passe :</label>
+          <input type="password" name="password_confirmation" required>
         </div>
-
-        <div>
-            <label>Date de naissance :</label>
-            <input type="date" name="birthdate" required>
+  
+        <div class="form-group">
+          <label>Date de naissance</label>
+          <input type="date" name="birthdate" required>
         </div>
-
+  
         <button type="submit">S'inscrire</button>
-    </form>
-
-</body>
+      </form>
+    </div>
+  </body>
 
 </html>
