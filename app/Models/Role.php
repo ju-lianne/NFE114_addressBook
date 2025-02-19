@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Categories extends Model
+class Role extends Model
 {
     use HasFactory;
 
-    protected $table = 'categories';
+    protected $table = 'roles';
 
     protected $fillable = [
         'libelle',
     ];
 
-    public function contacts()
+    public function utilisateurs()
     {
-        return $this->hasMany(Contacts::class);
+        return $this->hasMany(Utilisateur::class);
     }
 }
