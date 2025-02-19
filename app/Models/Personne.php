@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Personnes extends Model
+class Personne extends Model
 {
     use HasFactory;
 
@@ -27,11 +27,11 @@ class Personnes extends Model
 
     public function contact()
     {
-        return $this->hasOne(Contacts::class, 'id', 'id');
+        return $this->hasOne(Contact::class, 'id', 'id');
     }
 
     public function utilisateur()
     {
-        return $this->hasOne(Utilisateurs::class, 'id', 'id');
+        return $this->hasOne(Utilisateur::class, 'id', 'id');
     }
 }

@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Contacts extends Model
+class Utilisateur extends Model
 {
     use HasFactory;
 
-    protected $table = 'contacts';
+    protected $table = 'utilisateurs';
 
     protected $primaryKey = 'id';
     public $incrementing = false;
@@ -17,16 +17,17 @@ class Contacts extends Model
 
     protected $fillable = [
         'id',
-        'categorie_id',
+        'dateNaiss',
+        'role_id',
     ];
 
     public function personne()
     {
-        return $this->belongsTo(Personnes::class, 'id', 'id');
+        return $this->belongsTo(Personne::class, 'id', 'id');
     }
 
-    public function categorie()
+    public function role()
     {
-        return $this->belongsTo(Categories::class);
+        return $this->belongsTo(Role::class);
     }
 }
