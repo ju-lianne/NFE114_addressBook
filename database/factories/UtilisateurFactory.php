@@ -2,17 +2,19 @@
 
 namespace Database\Factories;
 
+use App\Models\Role;
+use App\Models\Utilisateur;
 use App\Models\Utilisateurs;
 use App\Models\Roles;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class UtilisateursFactory extends Factory
+class UtilisateurFactory extends Factory
 {
-    protected $model = Utilisateurs::class;
+    protected $model = Utilisateur::class;
 
     public function definition()
     {
-        $roleIds = Roles::pluck('id')->toArray();
+        $roleIds = Role::pluck('id')->toArray();
         $role_id = null;
         if (!empty($roleIds)) {
             $role_id = $this->faker->randomElement($roleIds);

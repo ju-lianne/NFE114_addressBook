@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Categories;
+use App\Models\Role;
+use App\Models\Roles;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CategoriesFactory extends Factory
+class RoleFactory extends Factory
 {
-    protected $model = Categories::class;
+    protected $model = Role::class;
 
     public function definition()
     {
