@@ -46,7 +46,6 @@
                     <div wire:loading.remove>
                         <livewire:contacts-list />
                     </div>
->>>>>>> resources/views/pages/dashboard/index.blade.php
                 </div>
             </div>
 
