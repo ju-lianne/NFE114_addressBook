@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Contacts extends Model
+class Contact extends Model
 {
     use HasFactory;
 
@@ -22,11 +22,11 @@ class Contacts extends Model
 
     public function personne()
     {
-        return $this->belongsTo(Personnes::class, 'id', 'id');
+        return $this->belongsTo(Personne::class, 'id', 'id');
     }
 
     public function categorie()
     {
-        return $this->belongsTo(Categories::class);
+        return $this->belongsTo(Categorie::class);
     }
 }
