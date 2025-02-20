@@ -1,84 +1,93 @@
-@php
-    function highlight($text, $search) {
-        if (!$search) {
-            return e($text);
-        }
-        $escaped = e($text);
-        return preg_replace('/(' . preg_quote($search, '/') . ')/i', '<span style="background-color:yellow;">$1</span>', $escaped);
-    }
-@endphp
-
-<div class="w-full h-full bg-base-200 p-4 flex flex-col">
-
-    <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-bold">Liste des Contacts</h2>
-        <div class="form-control">
-            <div class="input-group">
-                <input type="text" placeholder="Rechercher..."
-                       class="input input-bordered"
-                       wire:model.live="search" />
-                <button wire:click="$refresh" class="btn btn-square">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
-                         fill="none" viewBox="0 0 24 24"
-                         stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M21 21l-4.35-4.35m1.55-5.15A7 7 0 1110 3a7 7 0 017 7z" />
-                    </svg>
-                </button>
+<div class="mx-auto p-4">
+    <!-- Barre de recherche et bouton de filtre -->
+    <div class="mb-4 flex items-center justify-between sticky top-0 bg-white z-50 p-2">
+        <div class="flex-1 ">
+            <div class="form-control">
+                <div class="input-group">
+                    <input type="text" placeholder="Rechercher..."
+                           class="input input-bordered w-full"
+                           wire:model.live="search" />
+                </div>
+            </div>
+        </div>
+        <!-- Bouton pour afficher le mini-menu de filtres -->
+        <div x-data="{ open: false }" class="relative ml-4">
+            <button @click="open = !open" class="btn btn-sm btn-secondary">Filtrer</button>
+            <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white shadow-lg border rounded p-2 z-10">
+                <p class="font-semibold mb-2">Catégories</p>
+                @foreach($categories as $categorie)
+                    <div class="flex items-center">
+                        <input type="checkbox" value="{{ $categorie->id }}" wire:model.live="selectedCategories" id="cat-{{ $categorie->id }}" class="checkbox mr-2">
+                        <label for="cat-{{ $categorie->id }}">{{ $categorie->libelle }}</label>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
 
-    <div class="flex-1 overflow-y-auto pr-2">
-        <div class="grid grid-cols-1 gap-4">
+    <!-- Liste des contacts -->
+    <div>
+        <ul class="divide-y divide-gray-200">
             @forelse($contacts as $contact)
-                <div class="card card-bordered shadow-md flex items-center p-4">
-                    <div class="flex-1">
-                        <h3 class="text-xl font-semibold flex items-center">
-                            {!! highlight($contact->personne->prenom, $search) !!} {!! highlight($contact->personne->nom, $search) !!}
-                            @if($contact->categorie)
-                                <span class="badge badge-info text-sm ml-2">
-                                    {!! highlight($contact->categorie->libelle, $search) !!}
-                                </span>
-                            @else
-                                <span class="badge badge-secondary text-sm ml-2">
-                                    Sans catégorie
-                                </span>
-                            @endif
-                            @if($contact->personne->entreprise)
-                                <span class="badge badge-primary text-sm ml-2">
-                                    {!! highlight($contact->personne->entreprise->nom, $search) !!}
-                                </span>
-                            @endif
-                        </h3>
-                        <p class="text-sm text-gray-500">
-                            @if($contact->personne->courriel)
-                                <a href="mailto:{{ $contact->personne->courriel }}" class="hover:underline">
-                                    {!! highlight($contact->personne->courriel, $search) !!}
-                                </a>
-                            @else
-                                Aucun courriel
-                            @endif
-                        </p>
-                        <p class="text-sm text-gray-500">
-                            @if($contact->personne->telephone)
-                                <a href="tel:{{ $contact->personne->telephone }}" class="hover:underline">
-                                    {!! highlight($contact->personne->telephone, $search) !!}
-                                </a>
-                            @else
-                                Aucun téléphone
-                            @endif
-                        </p>
+                <li class="py-3 hover:bg-base-200 transition-colors duration-150">
+                    <div class="flex flex-col sm:flex-row justify-between items-center">
+                        <div class="flex flex-col">
+                            <span class="font-semibold text-base">
+                                {!! $this->highlight($contact->personne->prenom, $search) !!}
+                                {!! $this->highlight($contact->personne->nom, $search) !!}
+                            </span>
+                            <div class="mt-1 flex flex-wrap gap-1">
+                                @if($contact->categorie)
+                                    <span class="badge badge-sm badge-info">
+                                        {!! $this->highlight($contact->categorie->libelle, $search) !!}
+                                    </span>
+                                @else
+                                    <span class="badge badge-sm badge-secondary">Sans catégorie</span>
+                                @endif
+                                @if($contact->personne->entreprise)
+                                    <span class="badge badge-sm badge-primary">
+                                        {!! $this->highlight($contact->personne->entreprise->nom, $search) !!}
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="mt-2 sm:mt-0 text-right">
+                            <p class="text-sm">
+                                @if($contact->personne->courriel)
+                                    <a href="mailto:{{ $contact->personne->courriel }}" class="hover:underline">
+                                        {!! $this->highlight($contact->personne->courriel, $search) !!}
+                                    </a>
+                                @else
+                                    <span>Aucun courriel</span>
+                                @endif
+                            </p>
+                            <p class="text-sm">
+                                @if($contact->personne->telephone)
+                                    <a href="tel:{{ $contact->personne->telephone }}" class="hover:underline">
+                                        {!! $this->highlight($contact->personne->telephone, $search) !!}
+                                    </a>
+                                @else
+                                    <span>Aucun téléphone</span>
+                                @endif
+                            </p>
+                            <!-- Bouton Favoris : étoile qui se colore -->
+                            <div class="mt-2">
+                                <button wire:click="toggleFavorite({{ $contact->id }})" class="focus:outline-none">
+                                    <span class="{{ in_array($contact->id, $userFavoris) ? 'text-yellow-500' : 'text-gray-400' }} text-2xl">
+                                        ★
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </li>
             @empty
-                <div class="text-center col-span-1">Aucun contact trouvé.</div>
+                <li class="py-3 text-center text-gray-500">Aucun contact trouvé.</li>
             @endforelse
-        </div>
-    </div>
+        </ul>
 
-    <div class="mt-6">
-        {{ $contacts->links() }}
+        <div class="mt-4">
+            {{ $contacts->links() }}
+        </div>
     </div>
 </div>
