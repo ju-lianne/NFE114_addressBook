@@ -1,0 +1,14 @@
+stages:
+  - deploy
+
+deploy_projet:
+  stage: deploy
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache openssh-client git sshpass
+    - mkdir -p ~/.ssh
+    - ssh-keyscan -p 8084 -H "$DEPLOY_SERVER" >> ~/.ssh/known_hosts
+  script:
+    - sshpass -p "$DEPLOY_PASSWORD" ssh -tt -p 8084 $DEPLOY_USER@$DEPLOY_SERVER "sudo /usr/local/bin/deploy.sh"
+  only:
+    - main
