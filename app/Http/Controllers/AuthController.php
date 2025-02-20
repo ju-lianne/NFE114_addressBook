@@ -16,6 +16,11 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
     public function register(Request $request)
     {
         $request->validate([
@@ -33,6 +38,7 @@ class AuthController extends Controller
                 'nom'      => $request->nom,
                 'prenom'   => $request->prenom,
                 'courriel' => $request->email,
+                'telephone' => $request->phone,
             ]);
         }
 
@@ -58,6 +64,29 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('home');
+        return redirect()->route('dashboard');
+    }
+
+    public function login(Request $request) {
+        $request->validate([
+            'email'    => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        $personne = Personne::where('courriel', $request->email)->first();
+
+        if($personne) {
+            $existingUser = Utilisateur::where('id', $personne->id)->first();
+            if ($existingUser && Hash::check($request->password, $existingUser->password)) {
+                Auth::login($existingUser);
+                dd(Auth::check(), Auth::user());
+                return redirect()->route('dashboard');
+            } else {
+                return redirect()->route('login')->withErrors(['password' => 'Mot de passe incorrect.']);;
+            }
+        } else {
+            return redirect()->route('register')->withErrors("Cet email n'existe pas. Veuillez vous inscrire.");
+        }
+        return redirect()->route('dashboard');
     }
 }
