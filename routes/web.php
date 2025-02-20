@@ -12,4 +12,4 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.po
 
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
-Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+Route::get('/dashboard', [AuthController::class, 'index'])->name('dashboard');
