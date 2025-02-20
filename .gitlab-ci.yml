@@ -20,7 +20,7 @@ deploy_projet:
       composer install --no-dev --optimize-autoloader &&
       if [ -f package.json ]; then npm install && npm run build; fi &&
       php artisan migrate --force &&
-      chown -R www-data:www-data storage bootstrap/cache &&
+      chown -R www-data:www-data storage bootstrap/cache || true &&
       chmod -R 775 storage bootstrap/cache"
   only:
     - main
