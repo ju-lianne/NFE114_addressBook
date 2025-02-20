@@ -33,4 +33,10 @@ class Utilisateur extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+    public function favoris()
+    {
+        return $this->belongsToMany(Contact::class, 'favoris', 'utilisateur_id', 'contact_id')
+            ->using(Favoris::class)
+            ->withTimestamps();
+    }
 }
