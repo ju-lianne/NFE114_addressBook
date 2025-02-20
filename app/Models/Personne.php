@@ -21,7 +21,7 @@ class Personne extends Model
 
     public function entreprise()
     {
-        return $this->belongsTo(Entreprises::class);
+        return $this->belongsTo(Entreprise::class);
     }
 
     public function contact()
