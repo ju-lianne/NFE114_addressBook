@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use App\Livewire\ContactsList;
-use App\Models\Categories;
-use App\Models\Contacts;
-use App\Models\Personnes;
+use App\Models\Categorie;
+use App\Models\Contact;
+use App\Models\Personne;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -22,18 +22,18 @@ class ContactsListLivewireTest extends TestCase
 
     public function test_search_filters_contacts()
     {
-        $category = Categories::factory()->create([
+        $category = Categorie::factory()->create([
             'libelle' => 'Test Catégorie'
         ]);
 
-        $personne = Personnes::factory()->create([
+        $personne = Personne::factory()->create([
             'nom'       => 'Doe',
             'prenom'    => 'John',
             'telephone' => '0102030405',
             'courriel'  => 'john.doe@example.com'
         ]);
 
-        Contacts::factory()->create([
+        Contact::factory()->create([
             'id'           => $personne->id,
             'categorie_id' => $category->id,
         ]);
@@ -51,23 +51,23 @@ class ContactsListLivewireTest extends TestCase
 
     public function test_filter_by_single_category()
     {
-        $category1 = Categories::factory()->create(['libelle' => 'Category A']);
-        $category2 = Categories::factory()->create(['libelle' => 'Category B']);
+        $category1 = Categorie::factory()->create(['libelle' => 'Category A']);
+        $category2 = Categorie::factory()->create(['libelle' => 'Category B']);
 
-        $person1 = Personnes::factory()->create([
+        $person1 = Personne::factory()->create([
             'nom'    => 'Smith',
             'prenom' => 'Alice'
         ]);
-        Contacts::factory()->create([
+        Contact::factory()->create([
             'id'           => $person1->id,
             'categorie_id' => $category1->id,
         ]);
 
-        $person2 = Personnes::factory()->create([
+        $person2 = Personne::factory()->create([
             'nom'    => 'Jones',
             'prenom' => 'Bob'
         ]);
-        Contacts::factory()->create([
+        Contact::factory()->create([
             'id'           => $person2->id,
             'categorie_id' => $category2->id,
         ]);
@@ -85,32 +85,32 @@ class ContactsListLivewireTest extends TestCase
 
     public function test_filter_by_multiple_categories()
     {
-        $categoryA = Categories::factory()->create(['libelle' => 'Category A']);
-        $categoryB = Categories::factory()->create(['libelle' => 'Category B']);
+        $categoryA = Categorie::factory()->create(['libelle' => 'Category A']);
+        $categoryB = Categorie::factory()->create(['libelle' => 'Category B']);
 
-        $personA = Personnes::factory()->create([
+        $personA = Personne::factory()->create([
             'nom'    => 'Alpha',
             'prenom' => 'Anna'
         ]);
-        Contacts::factory()->create([
+        Contact::factory()->create([
             'id'           => $personA->id,
             'categorie_id' => $categoryA->id,
         ]);
 
-        $personB = Personnes::factory()->create([
+        $personB = Personne::factory()->create([
             'nom'    => 'Beta',
             'prenom' => 'Brian'
         ]);
-        Contacts::factory()->create([
+        Contact::factory()->create([
             'id'           => $personB->id,
             'categorie_id' => $categoryB->id,
         ]);
 
-        $personC = Personnes::factory()->create([
+        $personC = Personne::factory()->create([
             'nom'    => 'Gamma',
             'prenom' => 'Charlie'
         ]);
-        Contacts::factory()->create([
+        Contact::factory()->create([
             'id'           => $personC->id,
             'categorie_id' => null,
         ]);
@@ -124,23 +124,23 @@ class ContactsListLivewireTest extends TestCase
 
     public function test_search_and_filter_combination()
     {
-        $category1 = Categories::factory()->create(['libelle' => 'Category A']);
-        $category2 = Categories::factory()->create(['libelle' => 'Category B']);
+        $category1 = Categorie::factory()->create(['libelle' => 'Category A']);
+        $category2 = Categorie::factory()->create(['libelle' => 'Category B']);
 
-        $person1 = Personnes::factory()->create([
+        $person1 = Personne::factory()->create([
             'nom'    => 'Doe',
             'prenom' => 'John'
         ]);
-        Contacts::factory()->create([
+        Contact::factory()->create([
             'id'           => $person1->id,
             'categorie_id' => $category1->id,
         ]);
 
-        $person2 = Personnes::factory()->create([
+        $person2 = Personne::factory()->create([
             'nom'    => 'Smith',
             'prenom' => 'Jane'
         ]);
-        Contacts::factory()->create([
+        Contact::factory()->create([
             'id'           => $person2->id,
             'categorie_id' => $category2->id,
         ]);

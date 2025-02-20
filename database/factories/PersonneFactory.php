@@ -2,17 +2,19 @@
 
 namespace Database\Factories;
 
+use App\Models\Entreprise;
 use App\Models\Entreprises;
+use App\Models\Personne;
 use App\Models\Personnes;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PersonnesFactory extends Factory
+class PersonneFactory extends Factory
 {
-    protected $model = Personnes::class;
+    protected $model = Personne::class;
 
     public function definition()
     {
-        $entrepriseIds = Entreprises::pluck('id')->toArray();
+        $entrepriseIds = Entreprise::pluck('id')->toArray();
         $entreprise_id = null;
         if (!empty($entrepriseIds) && $this->faker->boolean(50)) {
             $entreprise_id = $this->faker->randomElement($entrepriseIds);

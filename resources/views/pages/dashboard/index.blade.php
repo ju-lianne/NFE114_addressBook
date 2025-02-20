@@ -50,6 +50,7 @@
         </div>
 
         <div class="row-start-[3] row-span-[2] col-start-[4] col-span-[5] card bg-base-100 shadow-xl m-2 p-4 flex items-center justify-center">
+        <livewire:stats/>
         </div>
 
         <div class="row-start-[5] row-span-[8] col-start-[4] col-span-[5] card bg-base-100 shadow-xl m-2 p-4">
