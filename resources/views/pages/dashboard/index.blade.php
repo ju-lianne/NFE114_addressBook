@@ -16,14 +16,14 @@
 <body>
 <main>
     <div class="w-screen h-screen grid grid-cols-11 grid-rows-12 gap-0">
-        <div class="row-start-[1] row-span-[2] col-start-[1] col-span-[8] card bg-base-100 shadow-xl m-2 p-4">
-            <div class="grid grid-cols-4 gap-2 h-full">
-                <div class="card bg-base-100 shadow-xl m-2 p-4 flex items-center justify-center">1</div>
-                <div class="card bg-base-100 shadow-xl m-2 p-4 flex items-center justify-center">1</div>
-                <div class="card bg-base-100 shadow-xl m-2 p-4 flex items-center justify-center">1</div>
-                <div class="card bg-base-100 shadow-xl m-2 p-4 flex items-center justify-center">1</div>
-            </div>
+        <div class="row-start-[1] row-span-[2] col-start-[1] col-span-[5] card bg-base-100 shadow-xl m-2 p-4">
+            @include('components.dashboard-nav')
         </div>
+
+        <div class="row-start-[1] row-span-[2] col-start-[6] col-span-[3] card bg-base-100 shadow-xl m-2 p-4" x-data="{ openContactModal: false, openEntrepriseModal: false }">
+            @include('components.dashboard-button-create')
+        </div>
+
 
         <div class="row-start-[1] row-span-[2] col-start-[9] col-span-[3] card bg-base-100 shadow-xl m-2 p-4">
         </div>
