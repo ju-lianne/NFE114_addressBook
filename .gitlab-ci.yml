@@ -11,9 +11,12 @@ deploy_projet:
   script:
     - |
       sshpass -p "$DEPLOY_PASSWORD" ssh -p 8084 $DEPLOY_USER@$DEPLOY_SERVER "cd $DEPLOY_PATH &&
+      cp .env .env.bak &&
       git config --global --add safe.directory $DEPLOY_PATH &&
       chmod -R 777 $DEPLOY_PATH &&
+      git reset --hard &&
       git pull https://$GITLAB_USERNAME:$GITLAB_TOKEN@gitlab.com/caensup9475439/licence-dev/20241/addressbook/sj_adress_book.git main &&
+      mv .env.bak .env &&
       composer install --no-dev --optimize-autoloader &&
       if [ -f package.json ]; then npm install && npm run build; fi &&
       php artisan migrate --force &&
@@ -21,4 +24,3 @@ deploy_projet:
       chmod -R 775 storage bootstrap/cache"
   only:
     - main
-
