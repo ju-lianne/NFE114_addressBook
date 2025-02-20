@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Utilisateur extends Model
+class Utilisateur extends Authenticatable
 {
     use HasFactory;
 
     protected $table = 'utilisateurs';
+    protected $with = ['personne'];
 
     protected $primaryKey = 'id';
     public $incrementing = false;
@@ -19,6 +20,8 @@ class Utilisateur extends Model
         'id',
         'dateNaiss',
         'role_id',
+        'password',
+        'rememberToken',
     ];
 
     public function personne()
