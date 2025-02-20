@@ -12,6 +12,7 @@ deploy_projet:
     - >
       sshpass -p "$DEPLOY_PASSWORD" ssh -p 8084 $DEPLOY_USER@$DEPLOY_SERVER "cd $DEPLOY_PATH &&
       git config --global --add safe.directory $DEPLOY_PATH &&
+      chmod -R 777 $DEPLOY_PATH &&
       git pull origin main &&
       composer install --no-dev --optimize-autoloader &&
       if [ -f package.json ]; then npm install && npm run build; fi &&
