@@ -2,6 +2,24 @@
     display: flex;
 }
 
+.style-flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.style-link {
+    text-decoration: none;
+    color: #000;
+}
+
+.style-link:hover {
+    color: #8f8f8f
+}
+
+.style-link:visited {
+    color: #606060
+}
+
 .style-center {
     display: flex;
     justify-content: center; /* centre horizontalement */

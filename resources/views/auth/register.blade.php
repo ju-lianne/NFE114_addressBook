@@ -23,19 +23,24 @@
       <form action="{{ route('register.post') }}" method="POST">
         @csrf
         <div class="form-group">
-          <label>Nom</label>
-          <input type="text" name="nom" required>
-        </div>
-  
-        <div class="form-group">
           <label>Prénom</label>
           <input type="text" name="prenom" required>
+        </div>
+
+        <div class="form-group">
+          <label>Nom</label>
+          <input type="text" name="nom" required>
         </div>
   
         <div class="form-group">
           <label>Courriel</label>
           <input type="email" name="email" required>
         </div>
+
+        <div class="form-group">
+            <label>Téléphone</label>
+            <input type="phone" name="phone" required>
+          </div>
   
         <div class="form-group">
           <label>Mot de passe</label>
