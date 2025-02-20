@@ -54,8 +54,13 @@
         </div>
 
         <div class="row-start-[5] row-span-[8] col-start-[4] col-span-[5] card bg-base-100 shadow-xl m-2 p-4">
-            <div class="row-start-[1] row-span-[2] col-start-[4] col-span-[5]"></div>
+            <div class="row-start-[1] row-span-[2] col-start-[4] col-span-[5]">
+                <h2 class="text-2xl font-bold text-center">Contacts favoris</h2>
+            </div>
             <div class="row-start-[2] row-span-[3] col-start-[4] col-span-[5] "></div>
+            <div class="overflow-auto">
+            <livewire:favorite-contacts-list />
+            </div>
         </div>
     </div>
 </main>
