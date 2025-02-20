@@ -10,7 +10,7 @@
 </head>
 <body>
 <h1 class="text-3xl font-bold underline ">
-    Hello world!
+    Bienvenue sur SJaddressBook
 </h1>
 <div class="w-full h-full bg-base-200 p-4 flex flex-col">
     <div class="hidden bg-primary"></div>
