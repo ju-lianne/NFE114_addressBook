@@ -28,7 +28,7 @@
         </ul>
 
         <div class="mt-4">
-            {{ $entreprises->links() }}
+            {{ $entreprises->links('vendor.pagination.custom-tailwind') }}
         </div>
     </div>
 </div>
