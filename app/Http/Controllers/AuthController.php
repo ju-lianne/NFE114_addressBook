@@ -36,6 +36,7 @@ class AuthController extends Controller
             'email'     => 'required|email',
             'password'  => 'required|string|min:6|confirmed',
             'birthdate' => 'required|date',
+            'phone' => 'required|string',
         ]);
 
         $user = $this->authService->registerUser($validatedData);
