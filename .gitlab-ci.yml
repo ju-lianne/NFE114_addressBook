@@ -2,37 +2,23 @@ stages:
   - test
   - deploy
 
-# JOB 1 : TEST
 test_project:
   stage: test
-  # Choisissez une image avec PHP, Composer et Node.js
-  # ou utilisez plusieurs jobs si vous préférez séparer tests PHP / front
   image: lorisleiva/laravel-docker:latest
   services: []
   variables:
-    # Par exemple si vous voulez utiliser .env.testing
     APP_ENV: testing
-    # Si vous avez besoin d'une DB, configurez la ici
   before_script:
     - composer install --no-interaction --prefer-dist --optimize-autoloader
     - cp .env.example .env.testing || true
+    - echo "DB_CONNECTION=sqlite" >> .env.testing
+    - echo "DB_DATABASE=:memory:" >> .env.testing
     - php artisan key:generate --env=testing
-    # Si vous avez un front, installez npm
-    # - npm install
   script:
     - php artisan migrate --env=testing --force
-    # Lancer les tests PHP
-    # Ou, si vous utilisez PHPUnit directement :
     - vendor/bin/phpunit
-    # (Eventuellement) tests front :
-    # - npm run test
   only:
-  artifacts:
-    when: always
-    paths:
-      - storage/logs
-    reports:
-      junit: junit.xml
+    - main
 
 deploy_project:
   stage: deploy
@@ -45,5 +31,3 @@ deploy_project:
     - sshpass -p "$DEPLOY_PASSWORD" ssh -tt -p 8084 $DEPLOY_USER@$DEPLOY_SERVER "sudo /usr/local/bin/deploy.sh"
   only:
     - main
-  dependencies:
-    - test_project
