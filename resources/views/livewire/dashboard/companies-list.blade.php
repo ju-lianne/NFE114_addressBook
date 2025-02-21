@@ -1,4 +1,4 @@
-<div class=" p-4">
+<div class=" p-4" wire:poll>
     <div class="mb-4 flex items-center justify-between sticky top-0 bg-white z-50 p-2">
         <div class="flex-1">
             <div class="form-control">

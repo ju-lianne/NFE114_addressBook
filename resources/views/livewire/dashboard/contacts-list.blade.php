@@ -1,4 +1,4 @@
-<div class="mx-auto p-4">
+<div class="mx-auto p-4" wire:poll>
     <!-- Barre de recherche et bouton de filtre -->
     <div class="mb-4 flex items-center justify-between sticky top-0 bg-white z-50 p-2">
         <div class="flex-1 ">

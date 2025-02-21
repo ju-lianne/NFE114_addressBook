@@ -1,4 +1,4 @@
-<div>
+<div wire:poll>
     @if (session()->has('message'))
         <div class="alert alert-success mb-4">
             {{ session('message') }}
