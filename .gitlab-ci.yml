@@ -14,6 +14,7 @@ test_project:
     - echo "DB_CONNECTION=sqlite" >> .env.testing
     - echo "DB_DATABASE=:memory:" >> .env.testing
     - php artisan key:generate --env=testing
+    - mkdir -p public/build && touch public/build/manifest.json
   script:
     - php artisan migrate --env=testing --force
     - vendor/bin/phpunit
