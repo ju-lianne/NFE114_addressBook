@@ -30,17 +30,7 @@ Génère une clé d’application Laravel :
 php artisan key:generate
 ```
 
-### 4️⃣ Lancer la base de données
-Si le projet utilise une base de données, configure-la dans `.env` :
-```
-DB_CONNECTION=pgsql
-DB_HOST=192.168.1.62
-DB_PORT=5432
-DB_DATABASE=casaos
-DB_USERNAME=casaos
-DB_PASSWORD=casaos
-```
-Puis exécute les migrations :
+### 4️⃣ Lancer la base de donnéesexécute les migrations :
 ```sh
 php artisan migrate
 ```
