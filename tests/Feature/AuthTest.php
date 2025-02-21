@@ -30,6 +30,7 @@ class AuthTest extends TestCase
             'prenom'                => 'Alice',
             'nom'                   => 'Dupont',
             'email'                 => 'alice@example.com',
+            'phone'                 => '0123456789',
             'password'              => 'secret123',
             'password_confirmation' => 'secret123',
             'birthdate'             => '1990-01-01',
