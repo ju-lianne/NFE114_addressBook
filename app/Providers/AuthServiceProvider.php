@@ -6,6 +6,7 @@ use App\Models\Personne;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Hash;
 
+
 class AuthServiceProvider
 {
     public function registerUser(array $data)
@@ -40,22 +41,5 @@ class AuthServiceProvider
         }
 
         return $user;
-    }
-
-    public function authenticateUser(array $data)
-    {
-        $personne = Personne::where('courriel', $data['email'])->first();
-
-        if (!$personne) {
-            return null;
-        }
-
-        $user = Utilisateur::where('id', $personne->id)->first();
-
-        if ($user && Hash::check($data['password'], $user->password)) {
-            return $user;
-        }
-
-        return null;
     }
 }
