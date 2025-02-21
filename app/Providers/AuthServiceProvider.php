@@ -14,11 +14,12 @@ class AuthServiceProvider
         $personne = Personne::where('courriel', $data['email'])->first();
 
         if (!$personne) {
+            dd($data);
             $personne = Personne::create([
                 'nom'       => $data['nom'],
                 'prenom'    => $data['prenom'],
                 'courriel'  => $data['email'],
-                'telephone' => $data['phone'] ?? null,
+                'telephone' => $data['phone'],
             ]);
         }
 
