@@ -1,7 +1,27 @@
 stages:
+  - test
   - deploy
 
-deploy_projet:
+test_project:
+  stage: test
+  image: lorisleiva/laravel-docker:latest
+  services: []
+  variables:
+    APP_ENV: testing
+  before_script:
+    - composer install --no-interaction --prefer-dist --optimize-autoloader
+    - cp .env.example .env.testing || true
+    - echo "DB_CONNECTION=sqlite" >> .env.testing
+    - echo "DB_DATABASE=:memory:" >> .env.testing
+    - php artisan key:generate --env=testing
+    - mkdir -p public/build && echo "{}" > public/build/manifest.json
+  script:
+    - php artisan migrate --env=testing --force
+    - vendor/bin/phpunit
+  only:
+    - main
+
+deploy_project:
   stage: deploy
   image: alpine:latest
   before_script:
